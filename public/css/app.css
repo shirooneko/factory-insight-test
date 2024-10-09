@@ -1,0 +1,118 @@
+/* public/css/app.css */
+
+/* Styling sidebar */
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #2F3349;
+    padding-top: 20px;
+    color: white;
+    transition: width 0.3s;
+}
+
+.sidebar.pinned {
+    width: 250px;
+}
+
+.sidebar:not(.pinned) {
+    width: 80px;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.menu-text {
+    display: inline;
+}
+
+.sidebar:not(.pinned) .menu-text {
+    display: none;
+}
+
+.sidebar:not(.pinned) .nav-link {
+    text-align: center;
+}
+
+.sidebar:not(.pinned) .nav-link .menu-icon {
+    margin-right: 0;
+}
+
+.pin-icon, .unpin-icon {
+    cursor: pointer;
+}
+
+.app-name {
+    display: inline;
+}
+
+.sidebar:not(.pinned) .app-name {
+    display: none;
+}
+
+/* Styling untuk menu */
+.nav-link {
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center; /* Menyejajarkan ikon dan teks di tengah */
+    border-radius: 5px; /* Menambahkan efek rounded */
+    margin: 5px 10px; /* Menambahkan margin agar tidak mentok ke ujung */
+    position: relative; /* Menambahkan posisi relatif untuk elemen .nav-link */
+}
+
+.nav-link:hover, .nav-link.active {
+    background: linear-gradient(45deg, #7367F0, #4F47A5);
+    color: white;
+    border-radius: 5px; /* Menambahkan efek rounded pada hover dan active */
+}
+
+/* Styling untuk submenu */
+.nav-item .collapse .nav-link {
+    margin-left: 20px; /* Menambahkan margin kiri pada submenu */
+}
+
+.collapse {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.6s ease; /* Menambahkan animasi transisi yang lebih panjang */
+}
+
+.collapse.show {
+    max-height: 1000px; /* Tampilkan submenu dengan animasi */
+}
+
+.nav-link .fas {
+    position: absolute; /* Menambahkan posisi absolut untuk ikon panah */
+    right: 15px; /* Menempatkan ikon panah di ujung kanan */
+}
+
+/* Styling untuk konten utama */
+.content {
+    margin-left: 250px; /* Adjust based on sidebar width */
+    padding: 20px;
+    transition: margin-left 0.3s ease-out;
+}
+
+.sidebar:not(.pinned) ~ .content {
+    margin-left: 80px; /* Adjust based on sidebar width */
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px;
+    }
+
+    .sidebar.pinned {
+        width: 80px;
+    }
+
+    .content {
+        margin-left: 80px;
+    }
+}
