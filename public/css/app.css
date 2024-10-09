@@ -7,7 +7,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #2F3349;
+    background-color: #2f3349;
     padding-top: 20px;
     color: white;
     transition: width 0.3s;
@@ -43,7 +43,8 @@
     margin-right: 0;
 }
 
-.pin-icon, .unpin-icon {
+.pin-icon,
+.unpin-icon {
     cursor: pointer;
 }
 
@@ -66,8 +67,9 @@
     position: relative; /* Menambahkan posisi relatif untuk elemen .nav-link */
 }
 
-.nav-link:hover, .nav-link.active {
-    background: linear-gradient(45deg, #7367F0, #4F47A5);
+.nav-link:hover,
+.nav-link.active {
+    background: linear-gradient(45deg, #7367f0, #4f47a5);
     color: white;
     border-radius: 5px; /* Menambahkan efek rounded pada hover dan active */
 }
@@ -101,6 +103,91 @@
 
 .sidebar:not(.pinned) ~ .content {
     margin-left: 80px; /* Adjust based on sidebar width */
+}
+
+.btn-transparent-danger {
+    background-color: transparent; /* Warna latar belakang transparan */
+    color: #dc3545; /* Warna teks solid untuk danger (merah) */
+    border: 1px solid #dc3545; /* Border merah */
+    transition: background-color 0.3s, color 0.3s; /* Efek transisi */
+    background-color: rgba(
+        220,
+        53,
+        69,
+        0.1
+    ); /* Warna latar belakang saat hover */
+    color: #dc3545; /* Warna teks tetap */
+}
+
+.btn-transparent-danger:hover {
+    background-color: transparent; /* Warna latar belakang transparan */
+    color: #dc3545; /* Warna teks solid untuk danger (merah) */
+    border: 1px solid #dc3545; /* Border merah */
+    transition: background-color 0.3s, color 0.3s; /* Efek transisi */
+    background-color: rgba(
+        220,
+        53,
+        69,
+        0.1
+    ); /* Warna latar belakang saat hover */
+    color: #dc3545; /* Warna teks tetap */
+}
+
+.btn-custom-submit {
+    background-color: #7367f0; /* Warna latar belakang solid untuk submit */
+    color: white; /* Warna teks solid untuk submit */
+    border: none; /* Tidak ada border */
+    transition: background-color 0.3s; /* Efek transisi */
+}
+
+.btn-custom-submit:hover {
+    background-color: #5e54b1;
+    color: white;
+}
+
+.modal-backdrop {
+    opacity: 0.5 !important;
+    /* Atur transparansi backdrop */
+}
+
+.text-dark.btn-edit {
+    text-decoration: none;
+    /* Menghilangkan garis bawah */
+}
+
+.badge-active {
+    background-color: rgba(0, 128, 0, 0.2);
+    /* Background hijau transparan */
+    border: 1px solid green;
+    /* Outline hijau */
+    color: green;
+    /* Tulisan hijau solid */
+    padding: 0.4em 0.8em;
+    /* Padding badge */
+    border-radius: 0.25rem;
+    /* Radius sudut */
+    font-weight: bold;
+    /* Bold untuk tulisan */
+}
+
+.badge-inactive {
+    background-color: rgba(128, 128, 128, 0.2);
+    /* Background abu-abu transparan */
+    border: 1px solid gray;
+    /* Outline abu-abu */
+    color: gray;
+    /* Tulisan abu-abu solid */
+    padding: 0.4em 0.8em;
+    /* Padding badge */
+    border-radius: 0.25rem;
+    /* Radius sudut */
+    font-weight: bold;
+    /* Bold untuk tulisan */
+}
+
+.btn[disabled] {
+    opacity: 0.5; /* Mengurangi transparansi */
+    cursor: not-allowed; /* Mengubah kursor untuk menunjukkan tidak dapat diklik */
 }
 
 @media (max-width: 768px) {

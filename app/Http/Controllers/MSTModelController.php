@@ -7,65 +7,68 @@ use Illuminate\Http\Request;
 
 class MSTModelController extends Controller
 {
-    // Menampilkan semua model
     public function index()
     {
         $models = MSTModel::all();
         return view('models.index', compact('models'));
     }
 
-    // Menampilkan form untuk membuat model baru
-    public function create()
-    {
-        return view('models.create');
-    }
-
-    // Menyimpan model baru
     public function store(Request $request)
     {
         $request->validate([
             'model_name' => 'required',
             'model_description' => 'nullable',
-            'is_active' => 'required|boolean',
         ]);
 
-        MSTModel::create($request->all());
+        $data = $request->all();
+        $data['is_active'] = isset($data['is_active']) ? $data['is_active'] : 1;
+
+        MSTModel::create($data);
+
         return redirect()->route('models.index')->with('success', 'Model berhasil ditambahkan');
     }
 
-    // Menampilkan detail model
     public function show($id)
     {
         $model = MSTModel::findOrFail($id);
         return view('models.show', compact('model'));
     }
 
-    // Menampilkan form untuk mengedit model
-    public function edit($id)
-    {
-        $model = MSTModel::findOrFail($id);
-        return view('models.edit', compact('model'));
-    }
-
-    // Mengupdate model yang sudah ada
     public function update(Request $request, $id)
     {
         $request->validate([
             'model_name' => 'required',
             'model_description' => 'nullable',
-            'is_active' => 'required|boolean',
         ]);
 
         $model = MSTModel::findOrFail($id);
-        $model->update($request->all());
+
+        if ($request->has('model_name') || $request->has('model_description')) {
+            $model->model_name = $request->input('model_name');
+            $model->model_description = $request->input('model_description');
+        }
+
+        $model->updated_at = now();
+        $model->save();
+
         return redirect()->route('models.index')->with('success', 'Model berhasil diperbarui');
     }
 
-    // Menghapus model
     public function destroy($id)
     {
         $model = MSTModel::findOrFail($id);
-        $model->delete();
-        return redirect()->route('models.index')->with('success', 'Model berhasil dihapus');
+        $model->is_active = 0;
+        $model->save();
+        return redirect()->route('models.index')->with('success', 'Model berhasil dinonaktifkan');
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $models = MSTModel::where('model_name', 'LIKE', "%{$query}%")
+                          ->orWhere('model_description', 'LIKE', "%{$query}%")
+                          ->get();
+
+        return response()->json($models);
     }
 }

@@ -27,6 +27,7 @@ Route::post('/models', [MSTModelController::class, 'store'])->name('models.store
 Route::get('/models/{id}/edit', [MSTModelController::class, 'edit'])->name('models.edit');
 Route::put('/models/{id}', [MSTModelController::class, 'update'])->name('models.update');
 Route::delete('/models/{id}', [MSTModelController::class, 'destroy'])->name('models.destroy');
+Route::get('/search-models', [MSTModelController::class, 'search'])->name('search.models');
 
 // Route untuk halaman daftar Parts
 Route::get('/parts', [MSTPartController::class, 'index'])->name('parts.index');
