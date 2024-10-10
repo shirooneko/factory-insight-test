@@ -15,10 +15,7 @@ use App\Http\Controllers\MSTPartController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-    
-});
+Route::get('/', [MSTModelController::class, 'index'])->name('models.index');
 
 // Route untuk halaman daftar Models
 Route::get('/models', [MSTModelController::class, 'index'])->name('models.index');
@@ -36,5 +33,7 @@ Route::post('/parts', [MSTPartController::class, 'store'])->name('parts.store');
 Route::get('/parts/{id}/edit', [MSTPartController::class, 'edit'])->name('parts.edit');
 Route::put('/parts/{id}', [MSTPartController::class, 'update'])->name('parts.update');
 Route::delete('/parts/{id}', [MSTPartController::class, 'destroy'])->name('parts.destroy');
+Route::get('/search/parts', [MSTPartController::class, 'search'])->name('search.parts');
+
 
 

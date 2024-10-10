@@ -1,12 +1,8 @@
-<!-- resources/views/partials/sidebar.blade.php -->
-
 <div class="sidebar pinned" id="sidebar">
-    <div class="sidebar-header">
-        <h4 class="px-3">
-            <span class="app-name">Factory Insight</span>
-            <i class="fas fa-thumbtack pin-icon" id="pinIcon"></i>
-            <i class="fas fa-thumbtack unpin-icon" id="unpinIcon" style="display: none;"></i>
-        </h4>
+    <div class="sidebar-header d-flex align-items-center"> <!-- Flexbox untuk menyusun elemen -->
+        <img id="sidebarLogo" src="{{ asset('icons/dark/factory-insight-dark.png') }}" alt="Factory Insight" class="app-logo mx-3" width="150px"/> <!-- Ganti span dengan gambar -->
+        <i class="fas fa-thumbtack pin-icon" id="pinIcon" style="font-size: 24px; cursor: pointer; margin-left: 10px;"></i> <!-- Ukuran ikon pin -->
+        <i class="fas fa-thumbtack unpin-icon" id="unpinIcon" style="display: none; font-size: 24px; cursor: pointer; margin-left: 10px;"></i> <!-- Ukuran ikon unpin -->
     </div>
     <ul class="nav flex-column">
         <li class="nav-item">
@@ -30,7 +26,6 @@
                 </li>
             </ul>
         </li>
-        <!-- Tambahkan menu lainnya di sini -->
     </ul>
 </div>
 
@@ -39,6 +34,7 @@
         var sidebar = document.getElementById('sidebar');
         var pinIcon = document.getElementById('pinIcon');
         var unpinIcon = document.getElementById('unpinIcon');
+        var sidebarLogo = document.getElementById('sidebarLogo'); // Ambil elemen logo
         var dropdownToggle = document.querySelector('.nav-link.dropdown-toggle-custom');
         var submenu = document.querySelector('#masterDataSubmenu');
         var chevronIcon = dropdownToggle.querySelector('.chevron-icon');
@@ -73,12 +69,14 @@
 
         pinIcon.addEventListener('click', function() {
             sidebar.classList.add('pinned');
+            sidebarLogo.style.display = 'block'; // Tampilkan logo
             pinIcon.style.display = 'none';
             unpinIcon.style.display = 'inline';
         });
 
         unpinIcon.addEventListener('click', function() {
             sidebar.classList.remove('pinned');
+            sidebarLogo.style.display = 'none'; // Sembunyikan logo
             pinIcon.style.display = 'inline';
             unpinIcon.style.display = 'none';
         });
@@ -87,8 +85,11 @@
         function checkScreenSize() {
             if (window.innerWidth <= 768) { // Ukuran layar untuk mobile
                 sidebar.classList.remove('pinned');
+                sidebarLogo.style.display = 'none'; // Sembunyikan logo
                 pinIcon.style.display = 'inline';
                 unpinIcon.style.display = 'none';
+            } else {
+                sidebarLogo.style.display = 'block'; // Tampilkan logo jika tidak mobile
             }
         }
 

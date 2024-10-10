@@ -28,7 +28,7 @@
         <div class="col-lg-12">
             <!-- Card untuk Tabel Models -->
             <div class="card w-100 shadow-sm h-100"
-                style="border: 1px solid rgba(128, 128, 128, 0.2); min-height: calc(100vh - 200px);">
+                style="border: 1px solid rgba(128, 128, 128, 0.2); min-height: calc(106vh - 200px);">
                 <div class="card-body p-2 d-flex flex-column">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="col mx-2" style="color: #2F3349;">Models</h2>
@@ -42,7 +42,7 @@
                         </div>
                     </div>
                     <div class="table-responsive flex-grow-1">
-                        <table class="table">
+                        <table class="table text-center">
                             <thead>
                                 <tr>
                                     <th style="background-color: #f0f0f0;">No</th>
@@ -86,6 +86,32 @@
                             </tbody>
                         </table>
                     </div>
+
+                        
+                <!-- Pagination dan Nama -->
+                <div class="d-flex justify-content-between align-items-center mt-4">
+                    <span class="fw-bold mx-3" style="color: #2F3349;">Muhammad Apriyansyah</span>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $models->url(1) }}" aria-label="First">&laquo;&laquo;</a> <!-- Double left arrow -->
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $models->previousPageUrl() }}" aria-label="Previous" @if(!$models->onFirstPage()) disabled @endif>&laquo;</a> <!-- Single left arrow -->
+                            </li>
+                            @for ($i = 1; $i <= $models->lastPage(); $i++)
+                                <li class="page-item @if ($i == $models->currentPage()) active @endif">
+                                    <a class="page-link" href="{{ $models->url($i) }}">{{ $i }}</a>
+                                </li>
+                            @endfor
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $models->nextPageUrl() }}" aria-label="Next" @if(!$models->hasMorePages()) disabled @endif>&raquo;</a> <!-- Single right arrow -->
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $models->url($models->lastPage()) }}" aria-label="Last">&raquo;&raquo;</a> <!-- Double right arrow -->
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
         </div>
@@ -138,7 +164,7 @@
             <div class="modal-body" style="position: relative;">
                 <div class="mb-4">
                     <span id="last_update_time"
-                        style="opacity: 0.7; position: absolute; top: 10px; right: 20px; font-style: italic;"></span>
+                        style="opacity: 0.7; position: absolute; top: 10px; right: 20px; font-style: italic; font-size: 0.8rem;"></span>
                 </div>
                 <form id="editModelForm" action="" method="POST">
                     @csrf

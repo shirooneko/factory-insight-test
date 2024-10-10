@@ -9,9 +9,9 @@ class MSTModelController extends Controller
 {
     public function index()
     {
-        $models = MSTModel::all();
+        $models = MSTModel::paginate(10); // Mengambil 10 model per halaman
         return view('models.index', compact('models'));
-    }
+    }    
 
     public function store(Request $request)
     {
