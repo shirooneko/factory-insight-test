@@ -26,6 +26,25 @@ class MSTPartController extends Controller
     
         return view('parts.index', compact('parts', 'models', 'nextPartNumber'));
     }
+
+    private function generateNextPartNumber()
+    {
+        // Ambil bagian terakhir berdasarkan part_number
+        $lastPart = MSTPart::orderBy('part_number', 'desc')->first();
+    
+        // Jika tidak ada part yang ada
+        if (!$lastPart) {
+            return 'P0001'; // Mulai dari P0001
+        }
+    
+        // Ambil angka setelah huruf 'P'
+        $lastNumber = (int) substr($lastPart->part_number, 1); 
+        $nextNumber = $lastNumber + 1;
+    
+        // Kembalikan nomor bagian berikutnya dengan format Pxxxx
+        return 'P' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
+    }
+    
      
 
     // Menyimpan part baru
@@ -42,18 +61,23 @@ class MSTPartController extends Controller
             'illustration_core' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'capacity' => 'required|integer',
         ]);
-    
+
         // Array untuk menyimpan nama file yang disimpan
         $illustrations = ['illustration_fix', 'illustration_move', 'illustration_core'];
         $imageFilenames = [];
-    
+
         foreach ($illustrations as $illustration) {
             // Generate nama acak 5 karakter untuk file
-            $randomName = Str::random(5) . '.' . $request->file($illustration)->extension();
+            $randomName = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 5) . '.' . $request->file($illustration)->extension();
+            
+            // Pindahkan file ke direktori yang ditentukan
             $path = $request->file($illustration)->move(public_path('illustrations'), $randomName);
-            $imageFilenames[$illustration] = $randomName; // Simpan nama file ke array
+            
+            // Simpan nama file ke array
+            $imageFilenames[$illustration] = $randomName; 
         }
-    
+
+        // Data yang akan disimpan
         $data = [
             'part_name' => $request->part_name,
             'model_id' => $request->model_id,
@@ -63,26 +87,18 @@ class MSTPartController extends Controller
             'capacity_in_cart' => $request->capacity,
             'is_active' => 1,
         ];
-    
+
+        // Debugging: Cek data sebelum menyimpan
+        // var_dump($data);die();
+
+        // Simpan data ke database
         MSTPart::create($data);
-    
+
         return redirect()->route('parts.index')->with('success', 'Part created successfully.');
     }
     
-    
-
     // Fungsi untuk menghasilkan nomor part berikutnya
-    private function generateNextPartNumber()
-    {
-        $lastPart = MSTPart::orderBy('id', 'desc')->first();
-        if (!$lastPart) {
-            return 'P0001';
-        }
 
-        $lastNumber = (int) substr($lastPart->part_number, 1);
-        $nextNumber = $lastNumber + 1;
-        return 'P' . str_pad($nextNumber, 4, '0', STR_PAD_LEFT);
-    }
 
     // Mengupdate part yang sudah ada
     public function update(Request $request, $id)
@@ -121,7 +137,8 @@ class MSTPartController extends Controller
             // Cek jika ada file yang diupload untuk gambar
             if ($request->hasFile($illustration)) {
                 // Generate nama acak 5 karakter untuk file
-                $randomName = Str::random(5) . '.' . $request->file($illustration)->extension();
+                $randomName = substr(str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'), 0, 5) . '.' . $request->file($illustration)->extension();
+                // Pindahkan file ke direktori yang ditentukan
                 $request->file($illustration)->move(public_path('illustrations'), $randomName);
                 $imageFilenames[$illustration] = $randomName; // Simpan nama file ke array
             }
@@ -133,8 +150,6 @@ class MSTPartController extends Controller
 
         return redirect()->route('parts.index')->with('success', 'Part updated successfully.');
     }
-
-    
 
     // Menghapus part
     public function destroy($id)

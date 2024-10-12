@@ -11,6 +11,9 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
+    <link rel="icon" href="{{ asset('icons/dark/factory-insight-minimize.png') }}" type="image/png"> <!-- Ganti dengan path yang sesuai jika menggunakan format lain -->
+    <link rel="apple-touch-icon" href="{{ asset('icons/dark/factory-insight-minimize.png') }}"> <!-- Untuk perangkat Apple -->
+
     <!-- Sidebar CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>

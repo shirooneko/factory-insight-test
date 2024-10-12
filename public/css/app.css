@@ -1,9 +1,22 @@
-/* public/css/app.css */
+/* Mengimpor font Poppins dari Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Atur font default untuk seluruh elemen */
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Atur warna latar belakang utama halaman */
+body {
+    background-color: #F8F7FA; /* Warna latar belakang utama */
+    margin: 0;
+    padding: 0;
+}
 
 /* Styling sidebar */
 .sidebar {
     height: 100vh;
-    width: 250px;
+    width: 332px;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,14 +24,15 @@
     padding-top: 20px;
     color: white;
     transition: width 0.3s;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3); /* Drop shadow pada sisi kanan */
 }
 
 .sidebar.pinned {
-    width: 250px;
+    width: 332px;
 }
 
 .sidebar:not(.pinned) {
-    width: 80px;
+    width: 120px;
 }
 
 .menu-icon {
@@ -56,6 +70,11 @@
     display: none;
 }
 
+.nav {
+    padding-left: 20px; /* Jarak kiri */
+    padding-right: 20px; /* Jarak kanan */
+}
+
 /* Styling untuk menu */
 .nav-link {
     color: white;
@@ -73,6 +92,13 @@
     color: white;
     border-radius: 5px; /* Menambahkan efek rounded pada hover dan active */
 }
+
+.active-main-menu {
+    background-color: #3D4056;
+    color: white;
+    border-radius: 5px;
+}
+
 
 /* Styling untuk submenu */
 .nav-item .collapse .nav-link {
@@ -106,44 +132,38 @@
 }
 
 .btn-transparent-danger {
-    background-color: transparent; /* Warna latar belakang transparan */
-    color: #dc3545; /* Warna teks solid untuk danger (merah) */
-    border: 1px solid #dc3545; /* Border merah */
+    background-color: #FFE2E3; /* Warna latar belakang transparan */
+    color: #FF5559; /* Warna teks solid untuk danger (merah) */
+    border: none; /* Tidak ada border */
+    width: 120px; /* Lebar tombol diperpendek */
+    height: 36px; /* Tinggi tombol diperpendek */
     transition: background-color 0.3s, color 0.3s; /* Efek transisi */
-    background-color: rgba(
-        220,
-        53,
-        69,
-        0.1
-    ); /* Warna latar belakang saat hover */
-    color: #dc3545; /* Warna teks tetap */
+    border-radius: 3%;
 }
 
 .btn-transparent-danger:hover {
-    background-color: transparent; /* Warna latar belakang transparan */
-    color: #dc3545; /* Warna teks solid untuk danger (merah) */
-    border: 1px solid #dc3545; /* Border merah */
-    transition: background-color 0.3s, color 0.3s; /* Efek transisi */
-    background-color: rgba(
-        220,
-        53,
-        69,
-        0.1
-    ); /* Warna latar belakang saat hover */
-    color: #dc3545; /* Warna teks tetap */
+    background-color: rgba(220, 53, 69, 0.1); /* Warna latar belakang saat hover */
+    color: #FF5559; /* Warna teks tetap saat hover */
+    border-radius: 3%;
 }
 
 .btn-custom-submit {
     background-color: #7367f0; /* Warna latar belakang solid untuk submit */
     color: white; /* Warna teks solid untuk submit */
     border: none; /* Tidak ada border */
+    width: 120px; /* Lebar tombol diperpendek */
+    height: 36px; /* Tinggi tombol diperpendek */
     transition: background-color 0.3s; /* Efek transisi */
+    border-radius: 3%;
 }
 
 .btn-custom-submit:hover {
-    background-color: #5e54b1;
-    color: white;
+    background-color: #5e54b1; /* Warna latar belakang saat hover */
+    color: white; /* Warna teks tetap saat hover */
+    border-radius: 3%;
 }
+
+
 
 .modal-backdrop {
     opacity: 0.5 !important;
@@ -156,33 +176,29 @@
 }
 
 .badge-active {
-    background-color: rgba(0, 128, 0, 0.2);
-    /* Background hijau transparan */
-    border: 1px solid green;
-    /* Outline hijau */
-    color: green;
-    /* Tulisan hijau solid */
-    padding: 0.4em 0.8em;
-    /* Padding badge */
-    border-radius: 0.25rem;
-    /* Radius sudut */
-    font-weight: bold;
-    /* Bold untuk tulisan */
+    background-color: #C4FBDC; /* Background hijau muda */
+    color: #35CA77; /* Tulisan hijau solid */
+    width: 99px; /* Lebar badge */
+    height: 100; /* Tinggi badge */
+    padding: 0.4em 0.8em; /* Padding badge */
+    border-radius: 0.25rem; /* Radius sudut */
+    font-weight: bold; /* Bold untuk tulisan */
+    display: flex; /* Agar mudah mengatur posisi konten di dalam badge */
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
 }
 
 .badge-inactive {
-    background-color: rgba(128, 128, 128, 0.2);
-    /* Background abu-abu transparan */
-    border: 1px solid gray;
-    /* Outline abu-abu */
-    color: gray;
-    /* Tulisan abu-abu solid */
-    padding: 0.4em 0.8em;
-    /* Padding badge */
-    border-radius: 0.25rem;
-    /* Radius sudut */
-    font-weight: bold;
-    /* Bold untuk tulisan */
+    background-color: #EBEBED; /* Background abu-abu muda */
+    color: #9396A1; /* Tulisan abu-abu solid */
+    width: 99px; /* Lebar badge */
+    height: 100; /* Tinggi badge */
+    padding: 0.4em 0.8em; /* Padding badge */
+    border-radius: 0.25rem; /* Radius sudut */
+    font-weight: bold; /* Bold untuk tulisan */
+    display: flex; /* Agar mudah mengatur posisi konten di dalam badge */
+    align-items: center; /* Vertically center the text */
+    justify-content: center; /* Horizontally center the text */
 }
 
 .btn[disabled] {
@@ -245,3 +261,4 @@
         margin-left: 80px;
     }
 }
+
